@@ -5,7 +5,7 @@ from torch.utils.data import DataLoader
 import torch as nn
 import click
 
-from data import mnist
+from src.data.data import mnist
 from model import Network
 
 from tqdm import tqdm
