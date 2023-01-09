@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
-import click
 import logging
-from pathlib import Path
-from dotenv import find_dotenv, load_dotenv
-from src.data import data_utils
 from os.path import join
+from pathlib import Path
+
+import click
 import torch as nn
+from dotenv import find_dotenv, load_dotenv
+
+from src.data import data_utils
 
 
 @click.command()
