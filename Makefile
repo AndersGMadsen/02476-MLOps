@@ -35,7 +35,7 @@ clean:
 	find . -type d -name "__pycache__" -delete
 
 train:
-	$(PYTHON_INTERPRETER) src/data/train_model.py
+	$(PYTHON_INTERPRETER) src/models/train_model.py
 
 ## Lint using flake8
 lint:
