@@ -7,7 +7,7 @@ from torch import nn, optim
 from src.data.data_utils import CorruptMNIST
 
 class Network(LightningModule):
-    def __init__(self):
+    def __init__(self, batch_size, lr, data_dir):
         super().__init__()
         self.conv1 = nn.Conv2d(1, 10, kernel_size=5)
         self.conv2 = nn.Conv2d(10, 20, kernel_size=5)
@@ -18,7 +18,9 @@ class Network(LightningModule):
         self.criterion = nn.CrossEntropyLoss()
         self.dataset = CorruptMNIST
 
-        self.batch_size = 256
+        self.batch_size = batch_size
+        self.lr = lr
+        self.data_dir = data_dir
 
     def forward(self, x):
         x = F.relu(F.max_pool2d(self.conv1(x), 2))
@@ -33,6 +35,11 @@ class Network(LightningModule):
         data, target = batch
         preds = self(data)
         loss = self.criterion(preds, target.flatten())
+
+        acc = (target.flatten() == preds.argmax(dim=-1)).float().mean()
+        self.log('train_loss', loss)
+        self.log('train_acc', acc)
+
         return loss
 
     def validation_step(self, batch, batch_idx):
@@ -42,13 +49,13 @@ class Network(LightningModule):
         self.log_dict({'val_loss': loss})
 
     def configure_optimizers(self):
-        return optim.Adam(self.parameters(), lr=1e-3)
+        return optim.Adam(self.parameters(), lr=self.lr)
 
     def train_dataloader(self):
         transform = transforms.Compose([transforms.ToTensor(),
                                 transforms.Normalize(0.13207851, 0.30989197)])
 
-        dataset = CorruptMNIST(root_dir="data/raw", train=True, transform=transform)
+        dataset = CorruptMNIST(root_dir=self.data_dir, train=True, transform=transform)
 
         loader = DataLoader(dataset=dataset, batch_size=self.batch_size, shuffle=True, num_workers=6)
 
@@ -57,10 +64,7 @@ class Network(LightningModule):
     def val_dataloader(self):
         transform = transforms.Compose([transforms.ToTensor(),
                                 transforms.Normalize(0.13207851, 0.30989197)])
-        dataset = CorruptMNIST(root_dir="data/raw", train=False, transform=transform)
+        dataset = CorruptMNIST(root_dir=self.data_dir, train=False, transform=transform)
         loader = DataLoader(dataset=dataset, batch_size=self.batch_size, num_workers=6)
         
         return loader
-
-    #def test_dataloader(self):
-    #    return super().val_dataloader()
