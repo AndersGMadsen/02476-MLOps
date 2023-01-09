@@ -1,6 +1,6 @@
 import torch as nn
 from torchvision import transforms
-
+from tests import _PATH_DATA
 from src.data.data_utils import CorruptMNIST
 from torchvision import transforms
 import os.path
