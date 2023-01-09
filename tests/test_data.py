@@ -1,14 +1,30 @@
 from tests import _PATH_DATA
+import torch as nn
 from src.data.data_utils import CorruptMNIST
+from torchvision import transforms
 
 def test_data():
+
+    transform = transforms.Compose([transforms.ToTensor(),
+                            transforms.Normalize(0.13207851, 0.30989197)])
+    
+    dir = _PATH_DATA + '/raw'
+    train_dataset = CorruptMNIST(root_dir=dir, train=True, transform=transform)
+    test_dataset = CorruptMNIST(root_dir=dir, train=False, transform=transform)
+
+    # test length of data
     N_train = 25000 #40000
     N_test = 5000
 
-    train = CorruptMNIST(root_dir=_PATH_DATA+'/raw', train=True, transform=transform)
-    loader = DataLoader(dataset=dataset, batch_size=self.batch_size, num_workers=6)
+    assert len(train_dataset) == N_train, "Train dataset did not have the correct number of samples"
+    assert len(test_dataset) == N_test, "Test dataset did not have the correct number of samples"
 
-    
-    assert len(dataset) == N_train for training and N_test for test
-    assert (datapoint.shape == [1,28,28] for datapoint in dataset)
-    assert that all labels are represented
+    # test shape of data
+    for idx in range(len(train_dataset)):
+        assert train_dataset[idx][0].shape == nn.Size([1, 28, 28]), "Train samples did not have the correct shape"
+    for idx in range(len(test_dataset)):
+        assert test_dataset[idx][0].shape == nn.Size([1, 28, 28]), "Test samples did not have the correct shape"
+
+    # test class representation
+    assert nn.all(nn.unique(nn.tensor([label for image, label in train_dataset.data])) == nn.tensor([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])), "Train samples did not represent all classes"
+    assert nn.all(nn.unique(nn.tensor([label for image, label in test_dataset.data])) == nn.tensor([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])), "Test samples did not represent all classes"
