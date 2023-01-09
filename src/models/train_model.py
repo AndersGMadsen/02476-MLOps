@@ -20,8 +20,13 @@ def train(config):
 
 	checkpoint_callback = ModelCheckpoint(dirpath = './models/checkpoints/')
 
+	if hparams["wandb"]:
+		logger = pl.loggers.WandbLogger(project='02476-mlops')
+	else:
+		logger = None
+
 	trainer = Trainer(callbacks=[checkpoint_callback, early_stopping_callback], 
-						logger=pl.loggers.WandbLogger(project='02476-mlops'),
+						logger=logger,
 						max_epochs=hparams['max_epochs'], gpus=1)
 
 	trainer.fit(model)

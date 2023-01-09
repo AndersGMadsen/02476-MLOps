@@ -3,3 +3,4 @@ seed: 23221373
 lr: 1e-3
 batch_size: 64
 max_epochs: 100
+wandb: False
