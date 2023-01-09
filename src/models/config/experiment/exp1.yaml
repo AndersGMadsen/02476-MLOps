@@ -2,4 +2,4 @@ data_dir: './data/raw'
 seed: 23221373
 lr: 1e-3
 batch_size: 64
-n_epochs: 20
+max_epochs: 100
