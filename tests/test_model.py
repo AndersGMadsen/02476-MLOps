@@ -1,9 +1,9 @@
-from tests import _PATH_DATA
 import torch as nn
-from src.data.data_utils import CorruptMNIST
 from torchvision import transforms
+
 from models.CNN import Network
-from torchvision import transforms
+from src.data.data_utils import CorruptMNIST
+from tests import _PATH_DATA
 
 
 def test_model():
@@ -19,6 +19,6 @@ def test_model():
     model = Network(batch_size, lr, data_dir)
     
 
-    # test shape of model output, use the first sample
+    # Test shape of model output, use the first sample
     assert model(train_dataset[0][0]).shape == nn.Size([1, 10])
     assert nn.sum(nn.exp(model(train_dataset[0][0]))) == 1
