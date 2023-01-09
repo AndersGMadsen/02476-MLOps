@@ -1,10 +1,11 @@
-import torch as nn
-import pytorch_lightning as pl
-from pytorch_lightning import Trainer
-from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping
-
 import hydra
+import pytorch_lightning as pl
+import torch as nn
+from pytorch_lightning import Trainer
+from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint
+
 from models.CNN import Network
+
 #from omegaconf import DictConfig, OmegaConf
 
 @hydra.main(version_base=None, config_path='config', config_name='default_config.yaml')

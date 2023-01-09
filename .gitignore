@@ -9,6 +9,7 @@ wandb/
 outputs/
 lightning_logs/
 *.ckpt
+.pytest_cache
 
 
 # Distribution / packaging

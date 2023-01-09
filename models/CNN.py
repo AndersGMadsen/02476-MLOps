@@ -1,10 +1,12 @@
-import torch.nn.functional as F
-from torch.utils.data import DataLoader
 import pytorch_lightning as pl
+import torch.nn.functional as F
 from pytorch_lightning import LightningModule
-from torchvision import transforms
 from torch import nn, optim
+from torch.utils.data import DataLoader
+from torchvision import transforms
+
 from src.data.data_utils import CorruptMNIST
+
 
 class Network(LightningModule):
     def __init__(self, batch_size, lr, data_dir):

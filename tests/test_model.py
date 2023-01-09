@@ -1,9 +1,9 @@
-from tests import _PATH_DATA
 import torch as nn
-from src.data.data_utils import CorruptMNIST
 from torchvision import transforms
+
 from models.CNN import Network
-from torchvision import transforms
+from src.data.data_utils import CorruptMNIST
+from tests import _PATH_DATA
 import os.path
 import pytest
 
