@@ -7,5 +7,6 @@ early_stopping_callback = EarlyStopping(
   monitor="val_loss", patience=3, verbose=True, mode="min"
 )  
 checkpoint_callback = ModelCheckpoint(dirpath = "./models")
-trainer = Trainer(callbacks=[early_stopping_callback], max_epochs=30, gpus=1)
+
+trainer = Trainer(callbacks=[checkpoint_callback, early_stopping_callback], max_epochs=30, gpus=1)
 trainer.fit(model)

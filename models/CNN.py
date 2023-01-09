@@ -1,5 +1,6 @@
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
+import pytorch_lightning as pl
 from pytorch_lightning import LightningModule
 from torchvision import transforms
 from torch import nn, optim
@@ -38,13 +39,7 @@ class Network(LightningModule):
         data, target = batch
         preds = self(data)
         loss = self.criterion(preds, target.flatten())
-        return loss
-
-    def test_step(self, batch, batch_idx):
-        data, target = batch
-        preds = self(data)
-        loss = self.criterion(preds, target.flatten())
-        return loss
+        self.log_dict({'val_loss': loss})
 
     def configure_optimizers(self):
         return optim.Adam(self.parameters(), lr=1e-3)
