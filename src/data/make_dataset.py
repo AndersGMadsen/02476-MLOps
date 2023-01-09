@@ -3,7 +3,7 @@ import click
 import logging
 from pathlib import Path
 from dotenv import find_dotenv, load_dotenv
-from src.data import data
+from src.data import data_utils
 from os.path import join
 import torch as nn
 
@@ -16,7 +16,7 @@ def main(input_filepath, output_filepath):
         cleaned data ready to be analyzed (saved in ../processed).
     """
 
-    processed_dataset = data.process_dataset(input_filepath)
+    processed_dataset = data_utils.process_dataset(input_filepath)
     nn.save(processed_dataset, join(output_filepath, "processed.pkl"))
 
     logger = logging.getLogger(__name__)
