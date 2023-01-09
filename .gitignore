@@ -8,6 +8,7 @@ __pycache__/
 wandb/
 outputs/
 lightning_logs/
+*.ckpt
 
 
 # Distribution / packaging
