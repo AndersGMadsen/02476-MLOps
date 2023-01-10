@@ -58,7 +58,6 @@ class Network(LightningModule):
                                 transforms.Normalize(0.13207851, 0.30989197)])
 
         dataset = CorruptMNIST(root_dir=self.data_dir, train=True, transform=transform)
-
         loader = DataLoader(dataset=dataset, batch_size=self.batch_size, shuffle=True, num_workers=6)
 
         return loader
