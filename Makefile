@@ -33,6 +33,10 @@ data: requirements
 clean:
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
+	rm -rf ".pytest_cache"
+	rm -rf "lightning_logs"
+	rm -rf "outputs"
+	rm -rf "wandb/"
 
 train:
 	$(PYTHON_INTERPRETER) src/models/train_model.py
