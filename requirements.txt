@@ -11,7 +11,7 @@ click~=8.1
 cookiecutter
 coverage==7.0
 dvc>=2.40.0
-dvc[gs]
+dvc-gdrive>=2.19.1
 flake8==6.0.0
 hydra-core>=1.3.1
 isort
