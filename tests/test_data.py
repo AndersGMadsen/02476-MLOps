@@ -1,10 +1,12 @@
 import torch as nn
 from torchvision import transforms
-
-from src.data.data_utils import CorruptMNIST
 from tests import _PATH_DATA
+from src.data.data_utils import CorruptMNIST
+from torchvision import transforms
+import os.path
+import pytest
 
-
+@pytest.mark.skipif(len(os.listdir(_PATH_DATA + '/raw')) < 2, reason="Data files not found")
 def test_data():
 
     transform = transforms.Compose([transforms.ToTensor(),
