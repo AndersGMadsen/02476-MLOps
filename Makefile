@@ -37,6 +37,7 @@ clean:
 	rm -rf "lightning_logs"
 	rm -rf "outputs"
 	rm -rf "wandb/"
+	rm -rf ".pytest_cache/"
 
 train:
 	$(PYTHON_INTERPRETER) src/models/train_model.py
