@@ -10,7 +10,6 @@ repos:
     -   id: check-added-large-files
     -   id: requirements-txt-fixer
     
--   repo: https://gitlab.com/pycqa/flake8
-    rev: 8f9b4931b9a28896fb43edccb23016a7540f5b82
+-   repo: https://github.com/PyCQA/flake8
     hooks:
     -   id: flake8
