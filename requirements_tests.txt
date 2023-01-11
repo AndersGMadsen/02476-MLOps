@@ -1,0 +1,6 @@
+isort
+cookiecutter
+coverage
+flake8
+pytest
+pre-commit
