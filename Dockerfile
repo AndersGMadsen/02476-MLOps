@@ -8,6 +8,7 @@ RUN apt update && \
 
 COPY requirements.txt requirements.txt
 COPY setup.py setup.py
+COPY models/ models/
 COPY src/ src/
 COPY data/ data/
 

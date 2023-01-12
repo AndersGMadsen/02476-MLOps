@@ -28,7 +28,7 @@ def train(config):
 
 	trainer = Trainer(callbacks=[checkpoint_callback, early_stopping_callback], 
 						logger=logger,
-						max_epochs=hparams['max_epochs'], gpus=1)
+						max_epochs=hparams['max_epochs'], gpus=hparams['gpus'])
 
 	trainer.fit(model)
 
