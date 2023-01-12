@@ -1,0 +1,4 @@
+outs:
+- md5: af8f290e976d13eae5429869b1b78a9e
+  size: 219
+  path: buildcloud.yaml
